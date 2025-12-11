@@ -1,5 +1,5 @@
 /* ======================================================================== */
-/* ZEN BROWSER - "SNAKE BORDER" (Matches Tab Shape)              */
+/* ZEN BROWSER - "Container Border Loader" (Matches Tab Shape)              */
 /* ======================================================================== */
 
 /* 1. DEFINE THE ANGLE (Allows spinning colors without spinning the shape) */
@@ -58,4 +58,5 @@
 /* 4. HIDE WHEN NOT LOADING */
 .tabbrowser-tab:not([busy]) .tab-background::before {
     display: none;
+
 }
