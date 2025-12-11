@@ -1,8 +1,4 @@
-/* ======================================================================== */
-/* ZEN BROWSER - "Container Border Loader" (Matches Tab Shape)              */
-/* ======================================================================== */
-
-/* 1. DEFINE THE ANGLE (Allows spinning colors without spinning the shape) */
+/* 1. DEFINE THE ANGLE */
 @property --zen-loading-angle {
   syntax: "<angle>";
   inherits: false;
@@ -14,30 +10,24 @@
     to { --zen-loading-angle: 360deg; }
 }
 
-/* 3. THE LOADING BORDER */
-.tabbrowser-tab[selected][busy] .tab-background::before {
+/* 3. THE LOADING BORDER (Applied to ANY busy tab) */
+.tabbrowser-tab[busy] .tab-background::before {
     content: "";
     display: block;
     position: absolute;
-    
-    /* FILL THE TAB EXACTLY */
     inset: 0; 
-    
-    /* CRITICAL FIX: This copies the tab's exact roundness */
     border-radius: inherit; 
-    
-    /* BORDER THICKNESS */
     padding: 2px; 
     
-    /* THE MOVING COLOR */
-    /* Uses Container Color (Green/Blue/etc), falls back to Gray (#ffffff77) */
+    /* SMOOTH SEAMLESS GRADIENT */
     background: conic-gradient(
         from var(--zen-loading-angle), 
-        transparent 40%, 
-        var(--identity-icon-color, #ffffff77) 100%
+        transparent 0%, 
+        var(--identity-icon-color, #ff00cc) 15%, 
+        transparent 50%,
+        transparent 100%
     );
     
-    /* THE MASK: Cuts out the center */
     -webkit-mask: 
        linear-gradient(#fff 0 0) content-box, 
        linear-gradient(#fff 0 0);
@@ -47,16 +37,20 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     
-    /* ANIMATION SPEED */
-    animation: border-spin 2s linear infinite;
-    
-    /* LAYERING: Sit on top, but let clicks pass through */
+    animation: border-spin 1.5s linear infinite;
     z-index: 1000;
     pointer-events: none;
+    
+    /* Make background tabs slightly dimmer so they don't distract */
+    opacity: 0.8; 
 }
 
-/* 4. HIDE WHEN NOT LOADING */
+/* 4. FORCE FULL OPACITY FOR ACTIVE TAB */
+.tabbrowser-tab[selected][busy] .tab-background::before {
+    opacity: 1;
+}
+
+/* 5. HIDE WHEN NOT LOADING */
 .tabbrowser-tab:not([busy]) .tab-background::before {
     display: none;
-
 }
