@@ -1,0 +1,15 @@
+{
+  "name": "Container Snake Loader",
+  "description": "A fluid loading indicator that traces the exact border of your tab, adapting to the container color automatically.",
+  "author": "asankahh",
+  "version": "1.0.0",
+  "id": "container-snake-loader",
+  "homepage": "https://github.com/asankahh/Container-Snake-Loader",
+  "tags": ["css", "animation", "tabs", "loading"],
+  "theme": {
+    "colors": {
+      "light": {},
+      "dark": {}
+    }
+  }
+}
